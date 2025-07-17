@@ -1,0 +1,4 @@
+# Placeholder for bullet impact sound effect
+# This would be a WAV file with a short impact/explosion sound
+# Recommended: 0.1-0.2 seconds duration, 44.1kHz sample rate
+# Sound should be appropriate for bullet hitting targets 

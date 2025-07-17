@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxvn9yqxqxqx"]
+
+[ext_resource type="Script" path="res://scripts/Bullet.gd" id="1_0x9yq"]
+[ext_resource type="Texture2D" path="res://assets/bullet.png" id="2_1x0yq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(8, 8)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_0x9yq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1x0yq")
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.014, 0.014)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="ImpactSound" type="AudioStreamPlayer" parent="."]
+volume_db = 10.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"] 

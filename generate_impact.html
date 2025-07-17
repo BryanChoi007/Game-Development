@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Impact Effect Sprite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 2px solid #333;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QjY0NjdGNjgyM0U1MTFFQ0E5NUNGRTY1NkRCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QjY0NjdGNjkyM0U1MTFFQ0E5NUNGRTY1NkRCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCNjQ2N0Y2NjIzRTUxMUVDQTk1Q0ZFNjU2REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCNjQ2N0Y2NzIzRTUxMUVDQTk1Q0ZFNjU2REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAAALAAAAAAoACgAAAIRhI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuCwAAOw==');
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .info {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Impact Effect Sprite Generator</h1>
+    <p>Generate a 16x16 pixel explosion/impact effect for Master Chief's Adventure</p>
+    
+    <div class="controls">
+        <button onclick="generateSprite()">Generate Impact Sprite</button>
+        <button onclick="downloadImage()">Download PNG</button>
+    </div>
+    
+    <canvas id="impactCanvas" width="16" height="16"></canvas>
+    
+    <div class="info">
+        <h3>Impact Effect Details:</h3>
+        <ul>
+            <li><strong>Size:</strong> 16x16 pixels</li>
+            <li><strong>Center:</strong> Bright Yellow (#FFFF00)</li>
+            <li><strong>Inner Ring:</strong> Orange (#FF8C00)</li>
+            <li><strong>Middle Ring:</strong> Red (#FF0000)</li>
+            <li><strong>Outer Ring:</strong> Dark Red (#8B0000)</li>
+            <li><strong>Background:</strong> Transparent</li>
+        </ul>
+        <p>This creates a radial explosion effect that fades from bright center to dark edges.</p>
+    </div>
+
+    <script>
+        function generateSprite() {
+            const canvas = document.getElementById('impactCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, 16, 16);
+            
+            const centerX = 8;
+            const centerY = 8;
+            
+            // Color definitions
+            const colors = {
+                center: '#FFFF00',  // Bright yellow
+                inner: '#FF8C00',   // Orange
+                middle: '#FF0000',  // Red
+                outer: '#8B0000'    // Dark red
+            };
+            
+            // Draw radial gradient
+            for (let y = 0; y < 16; y++) {
+                for (let x = 0; x < 16; x++) {
+                    const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+                    
+                    let color;
+                    if (distance <= 2) {
+                        color = colors.center;
+                    } else if (distance <= 4) {
+                        color = colors.inner;
+                    } else if (distance <= 6) {
+                        color = colors.middle;
+                    } else if (distance <= 8) {
+                        color = colors.outer;
+                    } else {
+                        continue; // Transparent
+                    }
+                    
+                    ctx.fillStyle = color;
+                    ctx.fillRect(x, y, 1, 1);
+                }
+            }
+            
+            // Add some variation for more realistic explosion
+            for (let i = 0; i < 8; i++) {
+                const x = Math.floor(Math.random() * 9) + 4; // 4-12
+                const y = Math.floor(Math.random() * 9) + 4; // 4-12
+                const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+                
+                if (distance <= 6) {
+                    // Make some pixels brighter
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fillRect(x, y, 1, 1);
+                }
+            }
+            
+            console.log('Impact sprite generated!');
+        }
+        
+        function downloadImage() {
+            const canvas = document.getElementById('impactCanvas');
+            const link = document.createElement('a');
+            link.download = 'impact_placeholder.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate sprite on page load
+        window.onload = function() {
+            generateSprite();
+        };
+    </script>
+</body>
+</html> 

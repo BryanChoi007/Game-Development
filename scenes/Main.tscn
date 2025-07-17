@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=3 uid="uid://bqxvn8yqxqxqx"]
+
+[ext_resource type="Script" uid="uid://bfq4v1pebtdia" path="res://scripts/Main.gd" id="1_0x8yq"]
+[ext_resource type="Script" uid="uid://cd0hdjstk8eml" path="res://scripts/Player.gd" id="2_1x9yq"]
+[ext_resource type="Script" uid="uid://chsfn3jekb64f" path="res://scripts/UI.gd" id="3_2x0yq"]
+[ext_resource type="Script" uid="uid://ytqx6fsg67u7" path="res://scripts/EnemySpawner.gd" id="4_3x1yq"]
+[ext_resource type="PackedScene" uid="uid://bqxvn0yqxqxqx" path="res://scenes/Enemy.tscn" id="5_4x2yq"]
+[ext_resource type="Script" uid="uid://gjne40kg01ib" path="res://scripts/CrosshairSprite.gd" id="7_6x4yq"]
+[ext_resource type="Script" uid="uid://e3pc7mq4dlb8" path="res://scripts/TerrainGenerator.gd" id="8_7x5yq"]
+[ext_resource type="Texture2D" uid="uid://dxtekqrfx4wb5" path="res://assets/master_chief.png" id="9_8x6yq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_1"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1"]
+_data = {
+&"damage": SubResource("Animation_1"),
+&"death": SubResource("Animation_1"),
+&"idle": SubResource("Animation_1"),
+&"shoot": SubResource("Animation_1"),
+&"walk_down": SubResource("Animation_1"),
+&"walk_left": SubResource("Animation_1"),
+&"walk_right": SubResource("Animation_1"),
+&"walk_up": SubResource("Animation_1")
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0x8yq")
+
+[node name="TerrainGenerator" type="Node2D" parent="."]
+script = ExtResource("8_7x5yq")
+
+[node name="TileMap" type="TileMap" parent="."]
+rendering_quadrant_size = 64
+format = 2
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(640, 360)
+script = ExtResource("2_1x9yq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_8x6yq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="BulletSpawn" type="Marker2D" parent="Player"]
+position = Vector2(15, 5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_1")
+}
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+
+[node name="GunshotSound" type="AudioStreamPlayer" parent="Player"]
+volume_db = -5.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_2x0yq")
+
+[node name="HealthLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 5.0
+offset_right = -20.0
+offset_bottom = 20.0
+text = "Health: 100/100"
+horizontal_alignment = 2
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+modulate = Color(0, 1, 0, 1)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 25.0
+offset_right = -20.0
+offset_bottom = 40.0
+value = 100.0
+
+[node name="AmmoLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 45.0
+offset_right = -20.0
+offset_bottom = 60.0
+text = "Ammo: ∞/∞"
+horizontal_alignment = 2
+
+[node name="Crosshair" type="Sprite2D" parent="UI"]
+modulate = Color(1, 0, 0, 0.8)
+script = ExtResource("7_6x4yq")
+
+[node name="Instructions" type="Label" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -100.0
+offset_right = 400.0
+offset_bottom = -20.0
+text = "WASD: Move
+Mouse: Aim
+Left Click/Space: Shoot
+ESC: Quit"
+vertical_alignment = 1
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("4_3x1yq")
+enemy_scene = ExtResource("5_4x2yq")
