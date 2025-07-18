@@ -28,6 +28,8 @@ func spawn_enemy():
 	var spawn_distance = spawn_radius + randf_range(0, 100)
 	var spawn_position = player.global_position + Vector2(cos(spawn_angle), sin(spawn_angle)) * spawn_distance
 	
+	print("Spawning enemy at position: ", spawn_position)  # Debug output
+	
 	# Create enemy
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = spawn_position

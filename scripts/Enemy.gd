@@ -18,9 +18,21 @@ var can_attack = true
 var attack_cooldown = 1.0
 
 func _ready():
+	print("Enemy spawned at position: ", global_position)  # Debug output
 	current_health = max_health
 	health_bar.max_value = max_health
 	health_bar.value = current_health
+	
+	# Set up elite enemy appearance
+	print("Elite enemy created successfully!")
+	if sprite and sprite.texture:
+		print("Elite texture loaded: ", sprite.texture.resource_path)
+		# Scale the elite to match the game size
+		sprite.scale = Vector2(0.1, 0.1)  # Same scale as Master Chief
+	else:
+		print("WARNING: Elite texture not loaded!")
+		# Fallback to a colored enemy if texture fails
+		sprite.modulate = Color(0.2, 0.8, 0.2, 1)  # Green for elite
 	
 	# Find the player
 	player = get_tree().get_first_node_in_group("player")
@@ -71,6 +83,17 @@ func update_animation():
 		animation_player.play("walk")
 	else:
 		animation_player.play("idle")
+	
+	# Make enemy face the player
+	if player:
+		var player_direction = (player.global_position - global_position).normalized()
+		# Flip sprite based on player position
+		if player_direction.x > 0:
+			# Player is to the right, face right
+			sprite.flip_h = false
+		elif player_direction.x < 0:
+			# Player is to the left, face left
+			sprite.flip_h = true
 
 func take_damage(amount: int):
 	current_health = max(0, current_health - amount)
