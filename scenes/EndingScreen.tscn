@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://kn46j17gw23o"]
+
+[ext_resource type="Script" path="res://scripts/EndingScreen.gd" id="1_0xqxq"]
+[ext_resource type="Texture2D" uid="uid://dxtekqrfx4wb5" path="res://assets/master_chief.png" id="2_1xqxq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.2, 0.4, 0.8, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 24
+font_color = Color(1, 1, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="EndingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_0xqxq")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.8, 0.4, 0.2, 1)
+
+[node name="SunsetGradient" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(1, 0.6, 0.3, 0.7)
+
+[node name="Mountains" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.3, 0.2, 0.1, 1)
+
+[node name="PlayerCharacter" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_1xqxq")
+
+[node name="ScrollingText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 200.0
+offset_right = -150.0
+offset_bottom = -200.0
+bbcode_enabled = true
+text = "Farewell
+
+After the final battle, Bella stood victorious. The world was safe from the fruit zombie menace, but at a great cost. Her father, once a brilliant scientist, had been consumed by his own creation. As the sun set over the mountains, Bella knew this was not just the end of a battle, but the beginning of a new chapter in her life.
+
+New Beginnings
+
+With the fruit zombie threat eliminated, Bella returned to her roots as a chef. But now, she was not just any chef - she was the hero who saved the world. Her restaurant became famous not just for its delicious meat dishes, but for the incredible story behind its owner. Bella had found her true calling, combining her culinary skills with her newfound purpose. The world was safe, and Bella had finally found peace."
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 75.0
+offset_right = 300.0
+offset_bottom = 150.0
+text = "Game Complete!"
+label_settings = SubResource("LabelSettings_1")
+horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -120.0
+offset_right = 150.0
+offset_bottom = -60.0
+text = "Quit Game"
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")

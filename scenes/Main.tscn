@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqxvn8yqxqxqx"]
+[gd_scene load_steps=15 format=3 uid="uid://bqxvn8yqxqxqx"]
 
 [ext_resource type="Script" uid="uid://bfq4v1pebtdia" path="res://scripts/Main.gd" id="1_0x8yq"]
 [ext_resource type="Script" uid="uid://cd0hdjstk8eml" path="res://scripts/Player.gd" id="2_1x9yq"]
 [ext_resource type="Script" uid="uid://chsfn3jekb64f" path="res://scripts/UI.gd" id="3_2x0yq"]
 [ext_resource type="Script" uid="uid://ytqx6fsg67u7" path="res://scripts/EnemySpawner.gd" id="4_3x1yq"]
 [ext_resource type="PackedScene" uid="uid://bqxvn0yqxqxqx" path="res://scenes/Enemy.tscn" id="5_4x2yq"]
+[ext_resource type="Script" uid="uid://caya4xbcbr5be" path="res://scripts/LevelManager.gd" id="6_level_manager"]
 [ext_resource type="Script" uid="uid://gjne40kg01ib" path="res://scripts/CrosshairSprite.gd" id="7_6x4yq"]
 [ext_resource type="Script" uid="uid://e3pc7mq4dlb8" path="res://scripts/TerrainGenerator.gd" id="8_7x5yq"]
 [ext_resource type="Texture2D" uid="uid://dxtekqrfx4wb5" path="res://assets/master_chief.png" id="9_8x6yq"]
@@ -39,8 +40,23 @@ _data = {
 &"walk_up": SubResource("Animation_1")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 120
+font_color = Color(1, 1, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2"]
+font_size = 120
+font_color = Color(1, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0x8yq")
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("6_level_manager")
 
 [node name="TerrainGenerator" type="Node2D" parent="."]
 script = ExtResource("8_7x5yq")
@@ -50,7 +66,8 @@ rendering_quadrant_size = 64
 format = 2
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(640, 360)
+position = Vector2(960, 540)
+collision_mask = 2
 script = ExtResource("2_1x9yq")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
@@ -69,6 +86,7 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(1.23584, -4.16919)
 zoom = Vector2(2, 2)
 
 [node name="GunshotSound" type="AudioStreamPlayer" parent="Player"]
@@ -110,6 +128,28 @@ offset_bottom = 60.0
 text = "Ammo: ∞/∞"
 horizontal_alignment = 2
 
+[node name="ChapterLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 65.0
+offset_right = -20.0
+offset_bottom = 80.0
+text = "Chapter 1: The Accident"
+horizontal_alignment = 2
+
+[node name="ProgressLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 85.0
+offset_right = -20.0
+offset_bottom = 100.0
+text = "Enemies: 0/4"
+horizontal_alignment = 2
+
 [node name="Crosshair" type="Sprite2D" parent="UI"]
 modulate = Color(1, 0, 0, 0.8)
 script = ExtResource("7_6x4yq")
@@ -126,6 +166,40 @@ text = "WASD: Move
 Mouse: Aim
 Left Click/Space: Shoot
 ESC: Quit"
+vertical_alignment = 1
+
+[node name="StageClearedLabel" type="Label" parent="UI"]
+visible = false
+z_index = 1000
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -150.0
+offset_right = 400.0
+offset_bottom = 150.0
+text = "STAGE CLEARED"
+label_settings = SubResource("LabelSettings_1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YouDiedLabel" type="Label" parent="UI"]
+visible = false
+z_index = 1000
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -150.0
+offset_right = 400.0
+offset_bottom = 150.0
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_2")
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EnemySpawner" type="Node2D" parent="."]

@@ -38,80 +38,186 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.05, 0.1, 0.2, 1)
+color = Color(0.1, 0.05, 0.05, 1)
 
-[node name="HaloRing" type="Node2D" parent="."]
-position = Vector2(640, 200)
+[node name="FruitDecorations" type="Node2D" parent="."]
 
-[node name="Ring1" type="Line2D" parent="HaloRing"]
-points = PackedVector2Array(-300, 0, 300, 0)
-width = 8
-default_color = Color(0.3, 0.6, 1, 0.8)
+[node name="Watermelon1" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(150, 225)
+size = Vector2(90, 60)
+color = Color(0.8, 0.2, 0.2, 0.8)
 
-[node name="Ring2" type="Line2D" parent="HaloRing"]
-points = PackedVector2Array(-250, 50, 250, 50)
-width = 6
-default_color = Color(0.2, 0.5, 0.9, 0.6)
+[node name="Watermelon2" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(1650, 300)
+size = Vector2(75, 52)
+color = Color(0.7, 0.15, 0.15, 0.7)
 
-[node name="Ring3" type="Line2D" parent="HaloRing"]
-points = PackedVector2Array(-200, 100, 200, 100)
-width = 4
-default_color = Color(0.1, 0.4, 0.8, 0.4)
+[node name="Apple1" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(300, 150)
+size = Vector2(45, 45)
+color = Color(0.8, 0.1, 0.1, 0.8)
 
-[node name="Ring4" type="Line2D" parent="HaloRing"]
-points = PackedVector2Array(-150, 150, 150, 150)
-width = 2
-default_color = Color(0.1, 0.3, 0.7, 0.3)
+[node name="Apple2" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(1500, 180)
+size = Vector2(37, 37)
+color = Color(0.7, 0.1, 0.1, 0.7)
+
+[node name="Pineapple1" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(225, 450)
+size = Vector2(60, 75)
+color = Color(0.9, 0.8, 0.2, 0.8)
+
+[node name="Pineapple2" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(1575, 525)
+size = Vector2(52, 67)
+color = Color(0.8, 0.7, 0.15, 0.7)
+
+[node name="Banana1" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(450, 375)
+size = Vector2(37, 60)
+color = Color(0.9, 0.8, 0.1, 0.8)
+
+[node name="Banana2" type="ColorRect" parent="FruitDecorations"]
+position = Vector2(1425, 420)
+size = Vector2(30, 52)
+color = Color(0.8, 0.7, 0.1, 0.7)
+
+[node name="BloodSplatters" type="Node2D" parent="."]
+
+[node name="BloodSplatter1" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(120, 210)
+size = Vector2(22, 15)
+color = Color(0.6, 0.1, 0.1, 0.9)
+
+[node name="BloodSplatter2" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(135, 217)
+size = Vector2(12, 9)
+color = Color(0.7, 0.1, 0.1, 0.8)
+
+[node name="BloodSplatter3" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(127, 225)
+size = Vector2(18, 12)
+color = Color(0.5, 0.05, 0.05, 0.9)
+
+[node name="BloodSplatter4" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(1120, 190)
+size = Vector2(10, 7)
+color = Color(0.6, 0.1, 0.1, 0.9)
+
+[node name="BloodSplatter5" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(1115, 195)
+size = Vector2(6, 4)
+color = Color(0.7, 0.1, 0.1, 0.8)
+
+[node name="BloodSplatter6" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(1125, 200)
+size = Vector2(9, 6)
+color = Color(0.5, 0.05, 0.05, 0.9)
+
+[node name="BloodSplatter7" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(190, 90)
+size = Vector2(11, 8)
+color = Color(0.6, 0.1, 0.1, 0.9)
+
+[node name="BloodSplatter8" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(195, 95)
+size = Vector2(7, 5)
+color = Color(0.7, 0.1, 0.1, 0.8)
+
+[node name="BloodSplatter9" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(200, 100)
+size = Vector2(13, 9)
+color = Color(0.5, 0.05, 0.05, 0.9)
+
+[node name="BloodSplatter10" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(990, 110)
+size = Vector2(8, 6)
+color = Color(0.6, 0.1, 0.1, 0.9)
+
+[node name="BloodSplatter11" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(995, 115)
+size = Vector2(5, 3)
+color = Color(0.7, 0.1, 0.1, 0.8)
+
+[node name="BloodSplatter12" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(1005, 120)
+size = Vector2(10, 7)
+color = Color(0.5, 0.05, 0.05, 0.9)
+
+[node name="BloodSplatter13" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(600, 400)
+size = Vector2(20, 15)
+color = Color(0.6, 0.1, 0.1, 0.9)
+
+[node name="BloodSplatter14" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(610, 410)
+size = Vector2(12, 8)
+color = Color(0.7, 0.1, 0.1, 0.8)
+
+[node name="BloodSplatter15" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(590, 405)
+size = Vector2(8, 6)
+color = Color(0.5, 0.05, 0.05, 0.9)
+
+[node name="BloodSplatter16" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(620, 415)
+size = Vector2(15, 10)
+color = Color(0.6, 0.1, 0.1, 0.9)
+
+[node name="BloodSplatter17" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(580, 420)
+size = Vector2(10, 7)
+color = Color(0.7, 0.1, 0.1, 0.8)
 
 [node name="Stars" type="Node2D" parent="."]
 
 [node name="Star1" type="ColorRect" parent="Stars"]
-position = Vector2(100, 80)
-size = Vector2(2, 2)
+position = Vector2(150, 120)
+size = Vector2(3, 3)
 color = Color(1, 1, 1, 0.8)
 
 [node name="Star2" type="ColorRect" parent="Stars"]
-position = Vector2(200, 120)
+position = Vector2(300, 180)
 size = Vector2(1, 1)
 color = Color(1, 1, 1, 0.6)
 
 [node name="Star3" type="ColorRect" parent="Stars"]
-position = Vector2(300, 60)
-size = Vector2(2, 2)
+position = Vector2(450, 90)
+size = Vector2(3, 3)
 color = Color(1, 1, 1, 0.7)
 
 [node name="Star4" type="ColorRect" parent="Stars"]
-position = Vector2(400, 100)
+position = Vector2(600, 150)
 size = Vector2(1, 1)
 color = Color(1, 1, 1, 0.5)
 
 [node name="Star5" type="ColorRect" parent="Stars"]
-position = Vector2(500, 80)
-size = Vector2(2, 2)
+position = Vector2(750, 120)
+size = Vector2(3, 3)
 color = Color(1, 1, 1, 0.8)
 
 [node name="Star6" type="ColorRect" parent="Stars"]
-position = Vector2(600, 140)
+position = Vector2(900, 210)
 size = Vector2(1, 1)
 color = Color(1, 1, 1, 0.6)
 
 [node name="Star7" type="ColorRect" parent="Stars"]
-position = Vector2(700, 70)
-size = Vector2(2, 2)
+position = Vector2(1050, 105)
+size = Vector2(3, 3)
 color = Color(1, 1, 1, 0.7)
 
 [node name="Star8" type="ColorRect" parent="Stars"]
-position = Vector2(800, 110)
+position = Vector2(1200, 165)
 size = Vector2(1, 1)
 color = Color(1, 1, 1, 0.5)
 
 [node name="Star9" type="ColorRect" parent="Stars"]
-position = Vector2(900, 90)
-size = Vector2(2, 2)
+position = Vector2(1350, 135)
+size = Vector2(3, 3)
 color = Color(1, 1, 1, 0.8)
 
 [node name="Star10" type="ColorRect" parent="Stars"]
-position = Vector2(1000, 130)
+position = Vector2(1500, 195)
 size = Vector2(1, 1)
 color = Color(1, 1, 1, 0.6)
 
@@ -120,11 +226,11 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
-offset_top = 100.0
-offset_right = 200.0
-offset_bottom = 150.0
-text = "HALO: MASTER CHIEF"
+offset_left = -300.0
+offset_top = 150.0
+offset_right = 300.0
+offset_bottom = 225.0
+text = "WATERMELON HUNTER"
 horizontal_alignment = 1
 vertical_alignment = 1
 label_settings = SubResource("LabelSettings_1")
@@ -134,11 +240,11 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -300.0
-offset_top = 150.0
-offset_right = 300.0
-offset_bottom = 180.0
-text = "A Godot Adventure"
+offset_left = -450.0
+offset_top = 225.0
+offset_right = 450.0
+offset_bottom = 270.0
+text = "A Tale of Fruit and Flesh"
 horizontal_alignment = 1
 vertical_alignment = 1
 label_settings = SubResource("LabelSettings_2")
@@ -150,10 +256,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -50.0
-offset_right = 100.0
-offset_bottom = 50.0
+offset_left = -150.0
+offset_top = -75.0
+offset_right = 150.0
+offset_bottom = 75.0
 
 [node name="StartButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2

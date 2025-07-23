@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://gameover"]
+
+[ext_resource type="Script" path="res://scripts/GameOver.gd" id="1_gameover"]
+[ext_resource type="Texture2D" path="res://assets/master_chief.png" id="2_mainchar"]
+[ext_resource type="Texture2D" path="res://assets/elite.png" id="3_enemy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.1, 0.1, 0.2, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.6, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 64
+font_color = Color(1, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2"]
+font_size = 32
+font_color = Color(1, 1, 1, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GameOver" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_gameover")
+
+[node name="BloodSplatters" type="Node2D" parent="."]
+
+[node name="BloodSplatter1" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(900, 600)
+size = Vector2(40, 25)
+color = Color(0.7, 0.1, 0.1, 0.8)
+
+[node name="BloodSplatter2" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(1020, 600)
+size = Vector2(30, 18)
+color = Color(0.8, 0.1, 0.1, 0.7)
+
+[node name="BloodSplatter3" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(960, 700)
+size = Vector2(50, 30)
+color = Color(0.6, 0.05, 0.05, 0.9)
+
+[node name="BloodSplatter4" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(960, 500)
+size = Vector2(35, 20)
+color = Color(0.7, 0.1, 0.1, 0.8)
+
+[node name="BloodSplatter5" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(880, 540)
+size = Vector2(25, 15)
+color = Color(0.8, 0.1, 0.1, 0.7)
+
+[node name="BloodSplatter6" type="ColorRect" parent="BloodSplatters"]
+position = Vector2(1040, 540)
+size = Vector2(20, 12)
+color = Color(0.6, 0.05, 0.05, 0.9)
+
+[node name="MainCharacter" type="Sprite2D" parent="."]
+position = Vector2(960, 600)
+scale = Vector2(0.3, 0.3)
+rotation_degrees = 90.0
+texture = ExtResource("2_mainchar")
+
+[node name="EnemyLeft1" type="Sprite2D" parent="."]
+position = Vector2(700, 550)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_enemy")
+
+[node name="EnemyLeft2" type="Sprite2D" parent="."]
+position = Vector2(750, 650)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_enemy")
+
+[node name="EnemyRight" type="Sprite2D" parent="."]
+position = Vector2(1200, 600)
+scale = Vector2(0.3, 0.3)
+flip_h = true
+texture = ExtResource("3_enemy")
+
+[node name="GameOverTitle" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 30.0
+offset_right = 0.0
+offset_bottom = 110.0
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+label_settings = SubResource("LabelSettings_1")
+
+[node name="DeathMessage" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 120.0
+offset_right = 300.0
+offset_bottom = 180.0
+text = "Bella has fallen to the fruit zombies..."
+horizontal_alignment = 1
+vertical_alignment = 1
+label_settings = SubResource("LabelSettings_2")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 200.0
+offset_right = 150.0
+offset_bottom = 300.0
+
+[node name="RestartButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "RESTART GAME"
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+
+[node name="QuitButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "QUIT"
+theme_override_styles/normal = SubResource("StyleBoxFlat_1") 

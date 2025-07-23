@@ -15,6 +15,7 @@ class_name Player
 
 var current_health: int
 var can_shoot = true
+var is_dead = false
 var bullet_scene = preload("res://scenes/Bullet.tscn")
 
 signal health_changed(new_health: int, max_health: int)
@@ -22,6 +23,14 @@ signal health_changed(new_health: int, max_health: int)
 func _ready():
 	current_health = max_health
 	emit_signal("health_changed", current_health, max_health)
+	
+	# Test tree access immediately
+	print("Player _ready() - testing tree access...")
+	var tree = get_tree()
+	if tree:
+		print("Tree access successful in _ready()")
+	else:
+		print("Tree is null in _ready()")
 	
 	# Generate gunshot sound if not already set
 	if gunshot_sound and not gunshot_sound.stream:
@@ -33,6 +42,12 @@ func _physics_process(delta):
 	handle_shooting()
 	update_animation()
 	update_rotation()
+	
+	# Test tree access occasionally
+	if Engine.get_process_frames() % 300 == 0:  # Every 300 frames (5 seconds at 60fps)
+		var tree = get_tree()
+		if not tree:
+			print("WARNING: Tree became null during gameplay!")
 
 func handle_movement():
 	var direction = Vector2.ZERO
@@ -141,11 +156,81 @@ func heal(amount: int):
 	emit_signal("health_changed", current_health, max_health)
 
 func die():
-	# Play death animation
-	animation_player.play("death")
-	await animation_player.animation_finished
+	if is_dead:
+		return  # Prevent multiple death calls
 	
-	# Reset position and health (for now, just respawn)
-	global_position = Vector2(640, 360)
-	current_health = max_health
-	emit_signal("health_changed", current_health, max_health) 
+	is_dead = true
+	print("Player died! Starting death animation...")
+	
+	# Stop all game progression immediately
+	if GameManager:
+		GameManager.set_game_over(true)
+	
+	# Disable player input and movement
+	set_physics_process(false)
+	set_process_input(false)
+	
+	# Start death animation sequence
+	_player_death_animation()
+
+func _player_death_animation():
+	# Create blood splatter effect around the player
+	_create_player_blood_splatter()
+	
+	# Rotate player 90 degrees to look like they fell down
+	var tween = create_tween()
+	tween.tween_property(self, "rotation_degrees", 90.0, 0.5)
+	
+	# Wait for the rotation animation to complete
+	await tween.finished
+	
+	print("Player: Death animation complete, showing You Died text...")
+	
+	# Show "You Died" text
+	var ui = get_tree().get_first_node_in_group("ui")
+	if ui and ui.has_method("show_you_died"):
+		print("Player: Calling UI show_you_died()")
+		ui.show_you_died()
+	else:
+		print("Player: ERROR - UI not found or show_you_died method not available")
+	
+	# Wait a moment for the text to appear before pausing
+	print("Player: Waiting 0.5 seconds for You Died text to appear...")
+	await get_tree().create_timer(0.5).timeout
+	
+	print("Player: Pausing game for 5 seconds...")
+	
+	# Pause the game for 5 seconds
+	get_tree().paused = true
+	await get_tree().create_timer(5.0).timeout
+	get_tree().paused = false
+	
+	print("Player: 5-second pause complete, transitioning to game over screen...")
+	
+	# Change to game over screen
+	var tree = get_tree()
+	if tree:
+		tree.change_scene_to_file("res://scenes/GameOver.tscn")
+
+func _create_player_blood_splatter():
+	# Create blood splatter effect around the player
+	for i in range(8):  # Create 8 blood splatters
+		var blood_splatter = ColorRect.new()
+		blood_splatter.color = Color(0.7, 0.1, 0.1, 0.8)
+		blood_splatter.size = Vector2(randf_range(10, 25), randf_range(8, 20))
+		
+		# Position blood splatter around the player
+		var angle = randf() * TAU
+		var distance = randf_range(30, 80)
+		var offset = Vector2(cos(angle), sin(angle)) * distance
+		blood_splatter.position = global_position + offset
+		
+		# Add to the scene
+		get_parent().add_child(blood_splatter)
+		
+		# Remove blood splatter after 5 seconds
+		await get_tree().create_timer(5.0).timeout
+		blood_splatter.queue_free()
+
+func is_player_dead() -> bool:
+	return is_dead 

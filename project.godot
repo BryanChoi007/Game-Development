@@ -10,16 +10,20 @@ config_version=5
 
 [application]
 
-config/name="Master Chief's Adventure"
-config/description="A top-down adventure game featuring Master Chief in a Zelda-style world"
+config/name="Watermelon Hunter"
+config/description="A tale of fruit and flesh - Bella's journey to become a fruit zombie hunter"
 run/main_scene="res://scenes/StartScreen.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="res://assets/icon.png"
 
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [input]

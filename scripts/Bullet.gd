@@ -36,19 +36,28 @@ func _ready():
 
 func _physics_process(delta):
 	position += velocity * delta
+	# Debug: Print bullet position occasionally
+	if Engine.get_process_frames() % 60 == 0:  # Every 60 frames
+		print("Bullet position: ", global_position, " Velocity: ", velocity)
 
 func _on_body_entered(body):
+	print("Bullet hit body: ", body.name, " Groups: ", body.get_groups())
+	
 	# Make bullet invisible immediately
 	sprite.visible = false
 	
 	# Don't damage the player (who fired the bullet) unless enough time has passed
 	if body.is_in_group("player") and not can_hit_player:
+		print("Ignoring player hit (too soon)")
 		return
 		
 	# Check if the body can take damage
 	if body.has_method("take_damage") or body.is_in_group("damageable"):
+		print("Dealing damage to: ", body.name)
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
+	else:
+		print("Body cannot take damage: ", body.name)
 	
 	# Play impact sound
 	if impact_sound:
@@ -73,17 +82,23 @@ func _on_body_entered(body):
 	queue_free()
 
 func _on_area_entered(area):
+	print("Bullet hit area: ", area.name, " Groups: ", area.get_groups())
+	
 	# Make bullet invisible immediately
 	sprite.visible = false
 	
 	# Don't damage the player (who fired the bullet) unless enough time has passed
 	if area.is_in_group("player") and not can_hit_player:
+		print("Ignoring player area hit (too soon)")
 		return
 		
 	# Check if the area can take damage
 	if area.has_method("take_damage") or area.is_in_group("damageable"):
+		print("Dealing damage to area: ", area.name)
 		if area.has_method("take_damage"):
 			area.take_damage(damage)
+	else:
+		print("Area cannot take damage: ", area.name)
 	
 	# Play impact sound
 	if impact_sound:
