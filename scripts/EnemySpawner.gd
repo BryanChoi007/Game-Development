@@ -3,10 +3,12 @@ extends Node2D
 signal enemy_spawned(enemy)
 
 @export var enemy_scene: PackedScene
-@export var spawn_interval = 3.0
-@export var spawn_radius = 150.0
+@export var base_spawn_interval = 3.0
+@export var base_spawn_radius = 150.0
 
 var max_enemies = 5  # Will be calculated based on chapter
+var spawn_interval = 3.0  # Will be calculated based on chapter
+var spawn_radius = 150.0  # Will be calculated based on chapter
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -19,13 +21,28 @@ func _ready():
 	if not player:
 		player = get_tree().get_nodes_in_group("player")[0] if get_tree().get_nodes_in_group("player").size() > 0 else null
 	
-	# Calculate max enemies based on current chapter
+	# Calculate spawn parameters based on current chapter
 	if GameManager:
-		max_enemies = GameManager.current_chapter * 5
-		print("EnemySpawner: Chapter ", GameManager.current_chapter, " - Max enemies: ", max_enemies)
+		var current_chapter = GameManager.current_chapter
+		max_enemies = current_chapter * 5
+		
+		# Spawn interval decreases with each chapter (faster spawning)
+		spawn_interval = max(0.2, base_spawn_interval - (current_chapter - 1) * 0.3 - 0.3)
+		
+		# Spawn radius gets progressively smaller as levels increase
+		spawn_radius = max(200.0, 600.0 - (current_chapter - 1) * 50)  # Decreases by 50 pixels per chapter
+		
+		print("EnemySpawner: Chapter ", current_chapter, " - Max enemies: ", max_enemies)
+		print("EnemySpawner: Chapter ", current_chapter, " - Spawn interval: ", spawn_interval, " seconds")
+		print("EnemySpawner: Chapter ", current_chapter, " - Spawn radius: ", spawn_radius, " pixels")
 	else:
 		max_enemies = 5  # Default fallback
-		print("EnemySpawner: GameManager not found, using default max enemies: ", max_enemies)
+		spawn_interval = base_spawn_interval
+		spawn_radius = 600.0  # Default spawn radius
+		print("EnemySpawner: GameManager not found, using default values")
+		print("EnemySpawner: Default max enemies: ", max_enemies)
+		print("EnemySpawner: Default spawn interval: ", spawn_interval, " seconds")
+		print("EnemySpawner: Default spawn radius: ", spawn_radius, " pixels")
 	
 	print("EnemySpawner _ready() - starting spawn process")
 	print("EnemySpawner: Initial enemies array size: ", enemies.size())

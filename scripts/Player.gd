@@ -21,8 +21,11 @@ var bullet_scene = preload("res://scenes/Bullet.tscn")
 signal health_changed(new_health: int, max_health: int)
 
 func _ready():
-	current_health = max_health
-	emit_signal("health_changed", current_health, max_health)
+	reset_health()
+	
+	# Save health to GameManager for persistence
+	if GameManager:
+		GameManager.save_player_health(current_health)
 	
 	# Test tree access immediately
 	print("Player _ready() - testing tree access...")
@@ -145,6 +148,10 @@ func take_damage(amount: int):
 	current_health = max(0, current_health - amount)
 	emit_signal("health_changed", current_health, max_health)
 	
+	# Save health to GameManager for persistence
+	if GameManager:
+		GameManager.save_player_health(current_health)
+	
 	# Play damage animation
 	animation_player.play("damage")
 	
@@ -233,4 +240,22 @@ func _create_player_blood_splatter():
 		blood_splatter.queue_free()
 
 func is_player_dead() -> bool:
-	return is_dead 
+	return is_dead
+
+func reset_health():
+	# Check if this is the first level or if we should maintain health
+	if not GameManager or GameManager.current_chapter == 1:
+		# First level - start with full health
+		current_health = max_health
+		print("Player: Starting with full health (Chapter 1)")
+	else:
+		# Subsequent levels - get health from GameManager
+		var saved_health = GameManager.get_player_health()
+		if saved_health > 0:
+			current_health = saved_health
+			print("Player: Restored health from previous level: ", current_health)
+		else:
+			current_health = max_health
+			print("Player: No saved health found, using full health")
+	
+	emit_signal("health_changed", current_health, max_health) 

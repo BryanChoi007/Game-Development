@@ -2,11 +2,13 @@ extends CharacterBody2D
 
 class_name Enemy
 
-@export var speed = 100.0
+@export var base_speed = 100.0
 @export var max_health = 50
 @export var damage = 10
 @export var detection_range = 150.0
 @export var attack_range = 40.0
+
+var speed = 100.0  # Will be calculated based on chapter
 
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
@@ -20,6 +22,15 @@ var attack_cooldown = 1.0
 func _ready():
 	print("Enemy spawned at position: ", global_position)  # Debug output
 	current_health = max_health
+	
+	# Calculate enemy speed based on current chapter
+	if GameManager:
+		var current_chapter = GameManager.current_chapter
+		speed = base_speed + (current_chapter - 1) * 20  # Increase speed by 20 per chapter
+		print("Enemy: Chapter ", current_chapter, " - Speed: ", speed)
+	else:
+		speed = base_speed
+		print("Enemy: GameManager not found, using default speed: ", speed)
 	
 	# Set up elite enemy appearance
 	print("Elite enemy created successfully!")
@@ -48,24 +59,42 @@ func _physics_process(delta):
 	
 	var distance_to_player = global_position.distance_to(player.global_position)
 	
+	# Check current chapter for movement behavior
+	var current_chapter = 1
+	if GameManager:
+		current_chapter = GameManager.current_chapter
+	
 	# Calculate desired distance from player
 	var desired_distance = attack_range - 5  # Keep slightly closer than attack range
 	
-	if distance_to_player <= detection_range:
+	# If level is greater than 1, enemies move toward player immediately regardless of distance
+	if current_chapter > 1:
 		if distance_to_player <= attack_range:
 			# In attack range - stop moving and attack
 			velocity = Vector2.ZERO
 			if can_attack:
 				attack_player()
-		elif distance_to_player > desired_distance:
-			# Move towards player but maintain distance
+		else:
+			# Move towards player immediately (no detection range check)
 			var direction = (player.global_position - global_position).normalized()
 			velocity = direction * speed
-		else:
-			# At desired distance - stop moving
-			velocity = Vector2.ZERO
 	else:
-		velocity = Vector2.ZERO
+		# Original behavior for level 1 - only move when in detection range
+		if distance_to_player <= detection_range:
+			if distance_to_player <= attack_range:
+				# In attack range - stop moving and attack
+				velocity = Vector2.ZERO
+				if can_attack:
+					attack_player()
+			elif distance_to_player > desired_distance:
+				# Move towards player but maintain distance
+				var direction = (player.global_position - global_position).normalized()
+				velocity = direction * speed
+			else:
+				# At desired distance - stop moving
+				velocity = Vector2.ZERO
+		else:
+			velocity = Vector2.ZERO
 	
 	# Handle movement with collision detection
 	var collision = move_and_collide(velocity * delta)

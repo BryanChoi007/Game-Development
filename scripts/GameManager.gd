@@ -3,6 +3,7 @@ extends Node
 signal chapter_completed(chapter_number)
 signal game_completed
 signal stage_cleared
+signal enemy_killed_signal
 
 var current_chapter = 1
 var enemies_killed_in_chapter = 0
@@ -11,6 +12,7 @@ var is_scene_changing = false
 var total_chapters = 7
 var player_death_requested = false
 var is_completing_chapter = false
+var player_health = 100  # Store player health between levels
 
 # Calculate required kills based on chapter number
 var enemies_required_per_chapter: int:
@@ -58,6 +60,9 @@ func enemy_killed():
 	print("GameManager: Current chapter: ", current_chapter)
 	print("GameManager: Enemies required: ", enemies_required_per_chapter)
 	print("GameManager: Will complete chapter: ", enemies_killed_in_chapter >= enemies_required_per_chapter)
+	
+	# Emit signal to update UI
+	enemy_killed_signal.emit()
 	
 	if enemies_killed_in_chapter >= enemies_required_per_chapter and not is_completing_chapter:
 		print("GameManager: Final enemy killed! Showing stage cleared text...")
@@ -142,6 +147,17 @@ func reset_scene_changing():
 func reset_chapter_completion():
 	is_completing_chapter = false
 	print("GameManager: Chapter completion flag reset to false")
+
+func save_player_health(health: int):
+	player_health = health
+	print("GameManager: Saved player health: ", health)
+
+func get_player_health() -> int:
+	return player_health
+
+func reset_player_health():
+	player_health = 100
+	print("GameManager: Reset player health to 100")
 
 func _load_chapter_transition():
 	print("Loading Chapter ", current_chapter, ": ", chapter_data[current_chapter]["name"])
