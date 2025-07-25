@@ -1,0 +1,106 @@
+[gd_scene load_steps=2 format=3 uid="uid://battlefield_background"]
+
+[ext_resource type="Script" path="res://scripts/backgrounds/BattlefieldBackground.gd" id="1_battlefield"]
+
+[node name="BattlefieldBackground" type="Node2D"]
+script = ExtResource("1_battlefield")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.3, 0.2, 0.1, 1)
+
+[node name="Ground" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 700.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="Debris" type="Node2D" parent="."]
+
+[node name="Debris1" type="ColorRect" parent="Debris"]
+position = Vector2(300, 650)
+size = Vector2(120, 80)
+color = Color(0.5, 0.4, 0.3, 1)
+
+[node name="Debris2" type="ColorRect" parent="Debris"]
+position = Vector2(600, 680)
+size = Vector2(90, 60)
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="Debris3" type="ColorRect" parent="Debris"]
+position = Vector2(1000, 670)
+size = Vector2(150, 70)
+color = Color(0.5, 0.4, 0.3, 1)
+
+[node name="Debris4" type="ColorRect" parent="Debris"]
+position = Vector2(1400, 660)
+size = Vector2(100, 90)
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="Debris5" type="ColorRect" parent="Debris"]
+position = Vector2(1600, 690)
+size = Vector2(80, 50)
+color = Color(0.5, 0.4, 0.3, 1)
+
+[node name="DestroyedBuildings" type="Node2D" parent="."]
+
+[node name="Building1" type="ColorRect" parent="DestroyedBuildings"]
+position = Vector2(100, 200)
+size = Vector2(200, 400)
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Building2" type="ColorRect" parent="DestroyedBuildings"]
+position = Vector2(400, 150)
+size = Vector2(180, 350)
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="Building3" type="ColorRect" parent="DestroyedBuildings"]
+position = Vector2(1600, 180)
+size = Vector2(220, 420)
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Building4" type="ColorRect" parent="DestroyedBuildings"]
+position = Vector2(1300, 220)
+size = Vector2(160, 380)
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="FruitRemains" type="Node2D" parent="."]
+
+[node name="FruitRemains1" type="ColorRect" parent="FruitRemains"]
+position = Vector2(500, 720)
+size = Vector2(40, 30)
+color = Color(0.8, 0.2, 0.2, 0.6)
+
+[node name="FruitRemains2" type="ColorRect" parent="FruitRemains"]
+position = Vector2(800, 730)
+size = Vector2(35, 35)
+color = Color(0.9, 0.8, 0.2, 0.6)
+
+[node name="FruitRemains3" type="ColorRect" parent="FruitRemains"]
+position = Vector2(1200, 725)
+size = Vector2(30, 30)
+color = Color(0.8, 0.1, 0.1, 0.6)
+
+[node name="FruitRemains4" type="ColorRect" parent="FruitRemains"]
+position = Vector2(1500, 735)
+size = Vector2(45, 25)
+color = Color(0.9, 0.9, 0.2, 0.6)
+
+[node name="Smoke" type="Node2D" parent="."]
+
+[node name="Smoke1" type="ColorRect" parent="Smoke"]
+position = Vector2(200, 100)
+size = Vector2(60, 40)
+color = Color(0.3, 0.3, 0.3, 0.4)
+
+[node name="Smoke2" type="ColorRect" parent="Smoke"]
+position = Vector2(1700, 80)
+size = Vector2(50, 35)
+color = Color(0.3, 0.3, 0.3, 0.4)
+
+[node name="Smoke3" type="ColorRect" parent="Smoke"]
+position = Vector2(900, 120)
+size = Vector2(70, 45)
+color = Color(0.3, 0.3, 0.3, 0.4) 

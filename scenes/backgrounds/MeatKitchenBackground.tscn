@@ -1,0 +1,221 @@
+[gd_scene load_steps=2 format=3 uid="uid://meat_kitchen_background"]
+
+[ext_resource type="Script" path="res://scripts/backgrounds/MeatKitchenBackground.gd" id="1_meat_kitchen"]
+
+[node name="MeatKitchenBackground" type="Node2D"]
+script = ExtResource("1_meat_kitchen")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Floor" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 800.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.2, 0.15, 0.15, 1)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall1" type="ColorRect" parent="Walls"]
+position = Vector2(0, 0)
+size = Vector2(1920, 100)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="Wall2" type="ColorRect" parent="Walls"]
+position = Vector2(0, 0)
+size = Vector2(100, 1080)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="Wall3" type="ColorRect" parent="Walls"]
+position = Vector2(1820, 0)
+size = Vector2(100, 1080)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="MeatProcessingEquipment" type="Node2D" parent="."]
+
+[node name="MeatGrinder1" type="ColorRect" parent="MeatProcessingEquipment"]
+position = Vector2(300, 500)
+size = Vector2(150, 200)
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="MeatGrinder2" type="ColorRect" parent="MeatProcessingEquipment"]
+position = Vector2(1400, 480)
+size = Vector2(150, 200)
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ConveyorBelt1" type="ColorRect" parent="MeatProcessingEquipment"]
+position = Vector2(500, 650)
+size = Vector2(400, 60)
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="ConveyorBelt2" type="ColorRect" parent="MeatProcessingEquipment"]
+position = Vector2(1000, 680)
+size = Vector2(400, 60)
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="MeatSlicer" type="ColorRect" parent="MeatProcessingEquipment"]
+position = Vector2(800, 550)
+size = Vector2(200, 120)
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="MeatHooks" type="Node2D" parent="."]
+
+[node name="Hook1" type="ColorRect" parent="MeatHooks"]
+position = Vector2(200, 200)
+size = Vector2(20, 100)
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Hook2" type="ColorRect" parent="MeatHooks"]
+position = Vector2(400, 180)
+size = Vector2(20, 100)
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Hook3" type="ColorRect" parent="MeatHooks"]
+position = Vector2(600, 220)
+size = Vector2(20, 100)
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Hook4" type="ColorRect" parent="MeatHooks"]
+position = Vector2(1200, 190)
+size = Vector2(20, 100)
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Hook5" type="ColorRect" parent="MeatHooks"]
+position = Vector2(1400, 210)
+size = Vector2(20, 100)
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Hook6" type="ColorRect" parent="MeatHooks"]
+position = Vector2(1600, 200)
+size = Vector2(20, 100)
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="MeatPieces" type="Node2D" parent="."]
+
+[node name="MeatPiece1" type="ColorRect" parent="MeatPieces"]
+position = Vector2(210, 300)
+size = Vector2(40, 60)
+color = Color(0.6, 0.2, 0.2, 1)
+
+[node name="MeatPiece2" type="ColorRect" parent="MeatPieces"]
+position = Vector2(410, 280)
+size = Vector2(35, 55)
+color = Color(0.7, 0.3, 0.3, 1)
+
+[node name="MeatPiece3" type="ColorRect" parent="MeatPieces"]
+position = Vector2(610, 320)
+size = Vector2(45, 65)
+color = Color(0.6, 0.2, 0.2, 1)
+
+[node name="MeatPiece4" type="ColorRect" parent="MeatPieces"]
+position = Vector2(1210, 290)
+size = Vector2(30, 50)
+color = Color(0.7, 0.3, 0.3, 1)
+
+[node name="MeatPiece5" type="ColorRect" parent="MeatPieces"]
+position = Vector2(1410, 310)
+size = Vector2(40, 60)
+color = Color(0.6, 0.2, 0.2, 1)
+
+[node name="MeatPiece6" type="ColorRect" parent="MeatPieces"]
+position = Vector2(1610, 300)
+size = Vector2(35, 55)
+color = Color(0.7, 0.3, 0.3, 1)
+
+[node name="WorkStations" type="Node2D" parent="."]
+
+[node name="WorkStation1" type="ColorRect" parent="WorkStations"]
+position = Vector2(200, 600)
+size = Vector2(200, 100)
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="WorkStation2" type="ColorRect" parent="WorkStations"]
+position = Vector2(1500, 620)
+size = Vector2(200, 100)
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="WorkStation3" type="ColorRect" parent="WorkStations"]
+position = Vector2(800, 650)
+size = Vector2(200, 100)
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="StorageAreas" type="Node2D" parent="."]
+
+[node name="Freezer1" type="ColorRect" parent="StorageAreas"]
+position = Vector2(100, 300)
+size = Vector2(80, 200)
+color = Color(0.2, 0.2, 0.3, 1)
+
+[node name="Freezer2" type="ColorRect" parent="StorageAreas"]
+position = Vector2(1740, 320)
+size = Vector2(80, 200)
+color = Color(0.2, 0.2, 0.3, 1)
+
+[node name="StorageRack1" type="ColorRect" parent="StorageAreas"]
+position = Vector2(100, 100)
+size = Vector2(60, 150)
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="StorageRack2" type="ColorRect" parent="StorageAreas"]
+position = Vector2(1760, 120)
+size = Vector2(60, 150)
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="Light1" type="ColorRect" parent="Lights"]
+position = Vector2(400, 50)
+size = Vector2(60, 15)
+color = Color(0.6, 0.6, 0.7, 0.3)
+
+[node name="Light2" type="ColorRect" parent="Lights"]
+position = Vector2(800, 50)
+size = Vector2(60, 15)
+color = Color(0.6, 0.6, 0.7, 0.3)
+
+[node name="Light3" type="ColorRect" parent="Lights"]
+position = Vector2(1200, 50)
+size = Vector2(60, 15)
+color = Color(0.6, 0.6, 0.7, 0.3)
+
+[node name="Light4" type="ColorRect" parent="Lights"]
+position = Vector2(1600, 50)
+size = Vector2(60, 15)
+color = Color(0.6, 0.6, 0.7, 0.3)
+
+[node name="Steam" type="Node2D" parent="."]
+
+[node name="Steam1" type="ColorRect" parent="Steam"]
+position = Vector2(350, 400)
+size = Vector2(40, 30)
+color = Color(0.7, 0.7, 0.7, 0.3)
+
+[node name="Steam2" type="ColorRect" parent="Steam"]
+position = Vector2(1450, 380)
+size = Vector2(35, 25)
+color = Color(0.7, 0.7, 0.7, 0.3)
+
+[node name="Steam3" type="ColorRect" parent="Steam"]
+position = Vector2(850, 450)
+size = Vector2(45, 35)
+color = Color(0.7, 0.7, 0.7, 0.3)
+
+[node name="BloodStains" type="Node2D" parent="."]
+
+[node name="BloodStain1" type="ColorRect" parent="BloodStains"]
+position = Vector2(250, 720)
+size = Vector2(80, 40)
+color = Color(0.4, 0.1, 0.1, 0.6)
+
+[node name="BloodStain2" type="ColorRect" parent="BloodStains"]
+position = Vector2(1550, 740)
+size = Vector2(70, 35)
+color = Color(0.4, 0.1, 0.1, 0.6)
+
+[node name="BloodStain3" type="ColorRect" parent="BloodStains"]
+position = Vector2(850, 760)
+size = Vector2(90, 45)
+color = Color(0.4, 0.1, 0.1, 0.6) 

@@ -1,8 +1,7 @@
 extends Control
 
-@onready var chapter_title = $StoryPanel/ChapterTitle
-@onready var story_text = $StoryPanel/StoryText
-@onready var continue_prompt = $StoryPanel/ContinuePrompt
+@onready var scrolling_text = $ScrollingTextContainer/ScrollingText
+@onready var continue_prompt = $ContinuePrompt
 
 var chapter_stories = {
 	1: """Once upon a time, in a clandestine genetics lab, a scientist named Dr. Marcus Fruitan was on the brink of a breakthrough. He was splicing fruit and plant DNA with human DNA, aiming to create beings that could photosynthesize and sustain themselves.
@@ -155,6 +154,8 @@ Bella's story continued, not as a fruit ninja, but as a meat chef, carving her o
 }
 
 var current_chapter = 1
+var scroll_speed = 50  # pixels per second
+var scroll_tween: Tween
 
 func _ready():
 	# Get the current chapter from the GameManager
@@ -163,6 +164,9 @@ func _ready():
 	# Set up the chapter transition
 	setup_chapter(current_chapter)
 	
+	# Start the scrolling animation
+	start_scrolling()
+	
 	# Start the continue prompt animation
 	_animate_continue_prompt()
 
@@ -170,22 +174,116 @@ func setup_chapter(chapter_number: int):
 	current_chapter = chapter_number
 	var chapter_info = get_chapter_info(chapter_number)
 	
-	chapter_title.text = "Chapter %d: %s" % [chapter_number, chapter_info.name]
-	story_text.text = chapter_stories[chapter_number]
+	# Create the full text with chapter info at the beginning
+	var full_text = "[center][b]CHAPTER %d: %s[/b][/center]\n\n%s" % [
+		chapter_number, 
+		chapter_info.name, 
+		chapter_stories[chapter_number]
+	]
+	
+	scrolling_text.text = full_text
+	
+	# Set up the storyboard background based on chapter
+	setup_storyboard_background(chapter_number)
 
 func get_chapter_info(chapter_number: int):
 	# Use GameManager's chapter data instead of local data
 	return GameManager.get_chapter_info(chapter_number)
+
+func setup_storyboard_background(chapter_number: int):
+	# Hide all background elements first
+
+	var story_background = $StoryBackground
+	for child in story_background.get_children():
+		if child is ColorRect:
+			child.visible = false
+		elif child is Node2D:
+			child.visible = false
+			# Also hide children of Node2D
+			for grandchild in child.get_children():
+				if grandchild is ColorRect:
+					grandchild.visible = false
+	
+	# Show appropriate background based on chapter
+	match chapter_number:
+		1:  # The Accident - Lab explosion
+			story_background.get_node("LabBackground").visible = true
+			story_background.get_node("LabEquipment").visible = true
+			story_background.get_node("LabEquipment2").visible = true
+			
+		2:  # Fruit zombies rise - Dark battlefield
+			story_background.get_node("BattlefieldBackground").visible = true
+			story_background.get_node("BattlefieldDebris").visible = true
+			story_background.get_node("BattlefieldDebris2").visible = true
+			
+		3:  # Bella's cooking show - Kitchen
+			story_background.get_node("KitchenBackground").visible = true
+			story_background.get_node("KitchenCounter").visible = true
+			story_background.get_node("KitchenCounter2").visible = true
+			story_background.get_node("FruitDecorations").visible = true
+			
+		4:  # Government agents - Office
+			story_background.get_node("GovernmentOffice").visible = true
+			story_background.get_node("OfficeDesk").visible = true
+			story_background.get_node("OfficeChair").visible = true
+			
+		5:  # Combat journey - Battlefield
+			story_background.get_node("BattlefieldBackground").visible = true
+			story_background.get_node("BattlefieldDebris").visible = true
+			story_background.get_node("BattlefieldDebris2").visible = true
+			
+		6:  # Father discovery - Dark battlefield
+			story_background.get_node("BattlefieldBackground").visible = true
+			story_background.get_node("BattlefieldDebris").visible = true
+			story_background.get_node("BattlefieldDebris2").visible = true
+			
+		7:  # Final battle - Battlefield
+			story_background.get_node("BattlefieldBackground").visible = true
+			story_background.get_node("BattlefieldDebris").visible = true
+			story_background.get_node("BattlefieldDebris2").visible = true
+			
+		8:  # Aftermath - Battlefield
+			story_background.get_node("BattlefieldBackground").visible = true
+			story_background.get_node("BattlefieldDebris").visible = true
+			story_background.get_node("BattlefieldDebris2").visible = true
+			
+		9:  # Meat kitchen - New kitchen
+			story_background.get_node("MeatKitchen").visible = true
+			story_background.get_node("MeatCounter").visible = true
+			story_background.get_node("MeatCounter2").visible = true
+
+func start_scrolling():
+	# Wait a moment for the text to be set
+	await get_tree().process_frame
+	
+	# Set initial position at the bottom (text starts below the continue prompt area)
+	var start_pos = scrolling_text.position
+	scrolling_text.position = start_pos + Vector2(0, 1000)  # Start 1000 pixels below to clear the continue prompt area
+	
+	# Wait another frame for the text to be properly laid out
+	await get_tree().process_frame
+	
+	# Create a tween to move the text upward (like Star Wars crawl)
+	scroll_tween = create_tween()
+	var end_pos = start_pos + Vector2(0, -1400)  # Move up 1400 pixels to clear the top
+	scroll_tween.tween_property(scrolling_text, "position", end_pos, 60.0)  # 60 seconds duration (slower)
+	scroll_tween.tween_callback(_on_scroll_complete)
+
+func _on_scroll_complete():
+	# When scrolling is complete, show the continue prompt
+	continue_prompt.visible = true
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):  # Enter key
 		_continue_to_level()
 
 func _continue_to_level():
-	print("Continuing to Chapter ", current_chapter, " level...")
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")
 
 func _animate_continue_prompt():
+	# Show the continue prompt from the start
+	continue_prompt.visible = true
+	
 	# Create a blinking effect for the continue prompt
 	var tween = create_tween()
 	tween.set_loops()  # Loop forever

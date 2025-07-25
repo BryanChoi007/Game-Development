@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://kn46j17gw23o"]
+[gd_scene load_steps=6 format=3 uid="uid://kn46j17gw23o"]
 
 [ext_resource type="Script" path="res://scripts/EndingScreen.gd" id="1_0xqxq"]
 [ext_resource type="Texture2D" uid="uid://dxtekqrfx4wb5" path="res://assets/master_chief.png" id="2_1xqxq"]
+[ext_resource type="AudioStream" path="res://assets/ending_music.mp3" id="ending_music"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
 bg_color = Color(0.2, 0.4, 0.8, 1)
@@ -22,6 +23,11 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_0xqxq")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("ending_music")
+autoplay = true
+volume_db = -10.0
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1

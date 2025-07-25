@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://start_screen"]
+[gd_scene load_steps=7 format=3 uid="uid://start_screen"]
 
 [ext_resource type="Script" path="res://scripts/StartScreen.gd" id="1_start"]
+[ext_resource type="Texture2D" uid="uid://dxtekqrfx4wb5" path="res://assets/master_chief.png" id="master_chief_texture"]
+[ext_resource type="Texture2D" path="res://assets/elite.png" id="enemy_texture"]
+[ext_resource type="AudioStream" path="res://assets/title_song.mp3" id="title_music"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
 bg_color = Color(0.1, 0.1, 0.2, 0.8)
@@ -32,6 +35,11 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_start")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("title_music")
+autoplay = true
+volume_db = -10.0
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -269,4 +277,64 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1")
 [node name="QuitButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 text = "QUIT"
-theme_override_styles/normal = SubResource("StyleBoxFlat_1") 
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+
+[node name="AnimatedCharacters" type="Node2D" parent="."]
+
+[node name="MainCharacter" type="Node2D" parent="AnimatedCharacters"]
+position = Vector2(-200, 900)
+
+[node name="Sprite" type="Sprite2D" parent="AnimatedCharacters/MainCharacter"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("master_chief_texture")
+
+[node name="SpeechBubble" type="Control" parent="AnimatedCharacters/MainCharacter"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 100.0
+offset_bottom = -60.0
+visible = false
+
+[node name="Background" type="NinePatchRect" parent="AnimatedCharacters/MainCharacter/SpeechBubble"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="AnimatedCharacters/MainCharacter/SpeechBubble"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+text = "Die You Veggie Scum!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemy1" type="Node2D" parent="AnimatedCharacters"]
+position = Vector2(100, 900)
+
+[node name="Sprite" type="Sprite2D" parent="AnimatedCharacters/Enemy1"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("enemy_texture")
+
+[node name="Enemy2" type="Node2D" parent="AnimatedCharacters"]
+position = Vector2(150, 900)
+
+[node name="Sprite" type="Sprite2D" parent="AnimatedCharacters/Enemy2"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("enemy_texture")
+
+[node name="Enemy3" type="Node2D" parent="AnimatedCharacters"]
+position = Vector2(200, 900)
+
+[node name="Sprite" type="Sprite2D" parent="AnimatedCharacters/Enemy3"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("enemy_texture") 

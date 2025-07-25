@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bqxvn0yqxqxqx" path="res://scenes/Enemy.tscn" id="5_4x2yq"]
 [ext_resource type="Script" uid="uid://caya4xbcbr5be" path="res://scripts/LevelManager.gd" id="6_level_manager"]
 [ext_resource type="Script" uid="uid://gjne40kg01ib" path="res://scripts/CrosshairSprite.gd" id="7_6x4yq"]
-[ext_resource type="Script" uid="uid://e3pc7mq4dlb8" path="res://scripts/TerrainGenerator.gd" id="8_7x5yq"]
 [ext_resource type="Texture2D" uid="uid://dxtekqrfx4wb5" path="res://assets/master_chief.png" id="9_8x6yq"]
+[ext_resource type="Script" uid="uid://b125784i3lvje" path="res://scripts/LevelBackgroundManager.gd" id="10_level_background_manager"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(32, 32)
@@ -55,15 +55,15 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0x8yq")
 
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="LevelBackgroundManager" type="Node2D" parent="."]
+script = ExtResource("10_level_background_manager")
+
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("6_level_manager")
-
-[node name="TerrainGenerator" type="Node2D" parent="."]
-script = ExtResource("8_7x5yq")
-
-[node name="TileMap" type="TileMap" parent="."]
-rendering_quadrant_size = 64
-format = 2
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(960, 540)

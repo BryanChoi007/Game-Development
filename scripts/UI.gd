@@ -15,22 +15,6 @@ func _ready():
 	
 	# Set up crosshair to follow mouse
 	crosshair.visible = true
-	
-	# Debug: Check if stage cleared label is initialized
-	print("UI: Stage cleared label: ", stage_cleared_label)
-	if stage_cleared_label:
-		print("UI: Stage cleared label found and initialized")
-		print("UI: Stage cleared label visible: ", stage_cleared_label.visible)
-	else:
-		print("UI: ERROR - Stage cleared label not found!")
-	
-	# Debug: Check if you died label is initialized
-	print("UI: You died label: ", you_died_label)
-	if you_died_label:
-		print("UI: You died label found and initialized")
-		print("UI: You died label visible: ", you_died_label.visible)
-	else:
-		print("UI: ERROR - You died label not found!")
 
 func _process(delta):
 	# Update crosshair position to follow mouse
@@ -74,39 +58,25 @@ func show_message(message: String, duration: float = 3.0):
 	tween.tween_callback(message_label.queue_free)
 
 func show_stage_cleared():
-	print("UI: show_stage_cleared() called")
 	if stage_cleared_label:
-		print("UI: Stage cleared label found, making visible")
 		stage_cleared_label.visible = true
-		print("UI: Stage Cleared text displayed")
 		
 		# Optional: Add a fade in effect
 		var tween = create_tween()
 		stage_cleared_label.modulate = Color.TRANSPARENT
 		tween.tween_property(stage_cleared_label, "modulate", Color.WHITE, 0.5)
-		print("UI: Fade in animation started")
-	else:
-		print("UI: ERROR - Stage cleared label not found!")
 
 func hide_stage_cleared():
 	stage_cleared_label.visible = false
-	print("UI: Stage Cleared text hidden")
 
 func show_you_died():
-	print("UI: show_you_died() called")
 	if you_died_label:
-		print("UI: You died label found, making visible")
 		you_died_label.visible = true
-		print("UI: You Died text displayed")
 		
 		# Optional: Add a fade in effect
 		var tween = create_tween()
 		you_died_label.modulate = Color.TRANSPARENT
 		tween.tween_property(you_died_label, "modulate", Color.WHITE, 0.5)
-		print("UI: Fade in animation started for You Died")
-	else:
-		print("UI: ERROR - You died label not found!")
 
 func hide_you_died():
-	you_died_label.visible = false
-	print("UI: You Died text hidden") 
+	you_died_label.visible = false 

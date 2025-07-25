@@ -3,6 +3,7 @@ extends Control
 @onready var scrolling_text = $ScrollingText
 @onready var quit_button = $QuitButton
 @onready var player_character = $PlayerCharacter
+@onready var background_music = $BackgroundMusic
 
 var scroll_speed = 30.0  # pixels per second
 var initial_scroll_position = 0.0
@@ -41,4 +42,7 @@ func _start_character_jumping():
 	jump_tween.tween_property(player_character, "position", original_pos, 0.5)  # Land back down
 
 func _on_quit_pressed():
+	# Stop music before quitting
+	if background_music:
+		background_music.stop()
 	get_tree().quit() 

@@ -3,6 +3,7 @@ extends Control
 @onready var restart_button = $ButtonContainer/RestartButton
 @onready var quit_button = $ButtonContainer/QuitButton
 @onready var enemy_right = $EnemyRight
+@onready var background_music = $BackgroundMusic
 
 func _ready():
 	restart_button.pressed.connect(_on_restart_pressed)
@@ -13,11 +14,17 @@ func _ready():
 
 func _on_restart_pressed():
 	print("Restarting game...")
+	# Stop music before transition
+	if background_music:
+		background_music.stop()
 	GameManager.reset_game()
 	get_tree().change_scene_to_file("res://scenes/StartScreen.tscn")
 
 func _on_quit_pressed():
 	print("Quitting game...")
+	# Stop music before quitting
+	if background_music:
+		background_music.stop()
 	get_tree().quit()
 
 func _start_enemy_jumping():

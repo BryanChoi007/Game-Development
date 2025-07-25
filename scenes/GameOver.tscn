@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://gameover"]
+[gd_scene load_steps=8 format=3 uid="uid://gameover"]
 
 [ext_resource type="Script" path="res://scripts/GameOver.gd" id="1_gameover"]
 [ext_resource type="Texture2D" path="res://assets/master_chief.png" id="2_mainchar"]
 [ext_resource type="Texture2D" path="res://assets/elite.png" id="3_enemy"]
+[ext_resource type="AudioStream" path="res://assets/game_over.mp3" id="game_over_music"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
 bg_color = Color(0.1, 0.1, 0.2, 0.8)
@@ -33,6 +34,11 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_gameover")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("game_over_music")
+autoplay = true
+volume_db = -10.0
 
 [node name="BloodSplatters" type="Node2D" parent="."]
 
